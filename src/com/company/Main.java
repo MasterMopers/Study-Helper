@@ -1,12 +1,12 @@
 package com.company;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
+import static java.lang.Math.random;
 
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         //giving a small message to how the program works
         System.out.println("***\nHello, I am your very own study helper!\nTell me what terms you want to study and their definitions\nI'll randomly tell you to define certain terms to help you study!\nLet me know if you think of the correct answer or not and we'll study 'till you get all your terms correct!\n***");
 
@@ -15,19 +15,20 @@ public class Main {
         //defining term 1
 
         ArrayList<String> termslist = new ArrayList<>();
+        ArrayList<String> actualtermslist = new ArrayList<>();
+
         ArrayList<String> deflist = new ArrayList();
 
 
         while (true) {
             Scanner myObj1 = new Scanner(System.in);  //Create a Scanner object
-            System.out.println("Term #" + (termslist.size() + 1)); //asking for input value of the first term
+            System.out.println("Term #" + (termslist.size() + 1) + " (if done, enter 'done')"); //asking for input value of the first term
             String term = (myObj1.nextLine());  //defining the first term as a variable string
             if (term.equalsIgnoreCase("done")) {
                 break;
             }
 
             termslist.add(term);
-
 
             //defining def 1
             Scanner myObj2 = new Scanner(System.in);  //Create a Scanner object
@@ -38,72 +39,84 @@ public class Main {
 
 
         }
+        actualtermslist.addAll(termslist); //adding the elements from termslist into actualtermslist
         //System.out.println("done" + termslist.size());
-        System.out.println(termslist.get(0));
-        System.out.println(deflist.get(0));
+        //System.out.println(termslist.get(0));
+        //System.out.println(deflist.get(0));
+
+
+
+        //PART 3: Randomly printing out terms to the user
+        //          and checking for comprehension
+        //int randomIndex = (int)(random()*actualtermslist.size()); //i use actualtersmlist here in order to get a random number in ratio with how actualtersmlist is changing
+        //System.out.println("Random Index = " + randomIndex);
+        //***is this just printing a random indexing value in the list based on its size?
+        //yes i think so. tested running the line a couple times
+        //System.out.println(termslist.indexOf(randomIndex));
+        //this line is used to give me a delay before processing the next line or just for printing?
+        //Thread.sleep(7000);
+        //System.out.println(termslist.get(randomIndex));
+        //ok this works to print out a random element of the list
+        //i need to make sure that it doesnt print out a repeat. there must be a better way than just saying that...
+        //if randomIndex == (a term is has already printed), dont print, run the loop again until you dont equal.
+        //I might have trouble defining the variable in parenthesis, cuz i would need data recollection. (store the items in a another fucking list and shit)
+
+        //for the number of elements in a list, randomly print out that many terms. wait no, this has to include feedback
+        //this loop will stop once it has looped the amount of the list (or prob better, until there can only be repeats)
+        //inside the loop will be where it prints a random term and then asks for feedback with a delay
+        //for
+
+        System.out.print("Now comes the testing..!\n");
+        Thread.sleep(1000);
+        for (int i = 0; i < actualtermslist.size(); i++) {
+            int randomIndex = (int) (random() * actualtermslist.size()); //i use actualtersmlist here in order to get a random number in ratio with how actualtersmlist is changing
+            System.out.println("What is..? " + actualtermslist.get(randomIndex)); //here I am asking the user if they know a random term / from the terms list that is updating according to the terms aleardy asked
+            //System.out.println("\033[3mhello\033[1m"); //I can use this to print different settings of characters
+            //I might want to convert all the letters in this string input to upper case
+            Thread.sleep(1000);
+            Scanner myObj3 = new Scanner(System.in);
+            System.out.println("Did you get it? (yes = 'y' / no = 'n')");
+            String feedback = (myObj3.nextLine());
+            //System.out.print(feedback);
+            actualtermslist.remove(randomIndex); //here I am removing the asked term from the list of terms i will berandomly printing from so there are no repeats
+            //randomIndex only changes after the loop is done running correct? That is why I am able to have the same value with randomIndex in here
+
+            //int p;
+            //for (p = 0; p < actualtermslist.size(); p++) ;
+            //System.out.print(actualtermslist.get(p));
+            //this doesnt work here becaue it is inside the loop. dont actually know why its not still running as looping tho
+
+
+            if (feedback == "y") {
+                //loop again? yes, I am just continuing on with the loop. in other words, I am restarting the loop to print the next random term. its not passing on to the else code
+                //later I might want to put randomIndex term I say yes on in a new list for data collection or some other data manipulation, but for now its fine
+                continue;
+            } else {
+                //this part is off. not sure y its printing "y[-1]" when i input a 'y'. why is it always -1?
+                ArrayList<String> wrong_list = new ArrayList<>(); //creating a new list with the failed terms
+                //what about creating a list that doesnt have the actual string values. but it has the index values that those string i want r in. And I can get the index value of the index list and apply it to the string list. dumb tho i think. when/where would it be smart
+                //String next = termslist.get(randomIndex);
+                wrong_list.add(termslist.get(randomIndex)); //adding the failed terms to the wrong_list
+                //do i add the term from termslist or actualtermslist
+                //System.out.println(wrong_list);
+
+                continue;
+            }
+
+
+//            for (int p = 0; p < actualtermslist.size(); p++) ;
+//            System.out.print(actualtermslist.get(p));
+
+
+        }
 
 
 
 
 
-//
-//        //defining term 2
-//        Scanner myObj3 = new Scanner(System.in);
-//        System.out.println("Term #2:");
-//        String term_2 = (myObj3.nextLine());
-//        //defining def 2
-//        Scanner myObj4 = new Scanner(System.in);
-//        System.out.println("Definition of Term #2:");
-//        String def_2 = (myObj4.nextLine());
-//
-//        //defining term 3
-//        Scanner myObj5 = new Scanner(System.in);
-//        System.out.println("Term #3:");
-//        String term_3 = (myObj5.nextLine());
-//        //defining def 3
-//        Scanner myObj6 = new Scanner(System.in);
-//        System.out.println("Definition of Term #3:");
-//        String def_3 = (myObj6.nextLine());
-//
-//        //PART 2: Organizing all variables into arrays
-//        String terms[] = {term_1,term_2,term_3};
-//        String definitions[] = {def_1, def_2, def_3};
-//        //System.out.println(terms[0]);
-//        //System.out.println(definitions[0]);
-//
-//
-//
-//        //PART 3: Randomly printing out terms to the user
-//        //          and checking for comprehension
-//        int randomIndex = (int)(Math.random()*terms.length);
-//        //System.out.println("Random Index = " + randomIndex);
-//
-//        String randomterm = terms[randomIndex];
-//        System.out.println("What is the...?\n" + randomterm);
-//
-//        Scanner myObj7 = new Scanner(System.in);
-//        System.out.println("Got it...? (y for yes & n for no)");
-//        String answer = (myObj7.nextLine());
-//
-//        if (answer == "n") {
-//            System.out.println("Study the definition\n" + def_1);
-//        } else {
-//            break;
-//        }
-//
-//
-//
-//
-//        //PART 4: Repeating terms they said they didn't get (until they give the feedback that they get all of them)
-//
-//
-//
-//
-//
-//
-//        // I obviously dont want to repeat this sequence of printing a random element and checking for it, I should use a loop
-//
-//
-//
+        //PART 4: The Second round of testing - Repeating terms they said they didn't get (until they give the feedback that they get all of them)
+        //To start I will define how many rounds to do this for. for now, I will make a set number of rounds to 3
+
+
     }
 }
