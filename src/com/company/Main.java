@@ -66,27 +66,28 @@ public class Main {
         //inside the loop will be where it prints a random term and then asks for feedback with a delay
         //for
 
+
+        //System.out.println(actualtermslist.size());
+
+
         System.out.print("Now comes the testing..!\n");
-        Thread.sleep(1000);
-        for (int i = 0; i < actualtermslist.size(); i++) {
+//        Thread.sleep(1000);
+        for (int i = 0; i < (actualtermslist.size() + 1); i++) {
             int randomIndex = (int) (random() * actualtermslist.size()); //i use actualtersmlist here in order to get a random number in ratio with how actualtersmlist is changing
             System.out.println("What is..? " + actualtermslist.get(randomIndex)); //here I am asking the user if they know a random term / from the terms list that is updating according to the terms aleardy asked
             //System.out.println("\033[3mhello\033[1m"); //I can use this to print different settings of characters
             //I might want to convert all the letters in this string input to upper case
-            Thread.sleep(1000);
+//            Thread.sleep(1000);
             Scanner myObj3 = new Scanner(System.in);
             System.out.println("Did you get it? (yes = 'y' / no = 'n')");
             String feedback = (myObj3.nextLine());
             //System.out.print(feedback);
-            actualtermslist.remove(randomIndex); //here I am removing the asked term from the list of terms i will berandomly printing from so there are no repeats
+            actualtermslist.remove(randomIndex); //here I am removing the asked term from the list of terms i will be randomly printing from so there are no repeats
             //randomIndex only changes after the loop is done running correct? That is why I am able to have the same value with randomIndex in here
 
-            //int p;
-            //for (p = 0; p < actualtermslist.size(); p++) ;
-            //System.out.print(actualtermslist.get(p));
-            //this doesnt work here becaue it is inside the loop. dont actually know why its not still running as looping tho
 
 
+            //FEEDBACK CHECKER
             if (feedback == "y") {
                 //loop again? yes, I am just continuing on with the loop. in other words, I am restarting the loop to print the next random term. its not passing on to the else code
                 //later I might want to put randomIndex term I say yes on in a new list for data collection or some other data manipulation, but for now its fine
@@ -100,18 +101,28 @@ public class Main {
                 //do i add the term from termslist or actualtermslist
                 //System.out.println(wrong_list);
 
+
+//                for (int p = 0; p < actualtermslist.size(); p++) {
+//                    System.out.print(actualtermslist.get(p));
+//                }
+
                 continue;
             }
 
 
-//            for (int p = 0; p < actualtermslist.size(); p++) ;
+//        for (int p = 0; p < actualtermslist.size(); p++) {
 //            System.out.print(actualtermslist.get(p));
-
+            //so as of now, this is printing the term that is left to be studied in the actualtermslist
+            //why is it not printing the last term if the last term is still in the list???
+            //what are the possible things that this could mean?...
+            //the components are: the list, the last element in the list not getting printed
+            //the list is not indexing the last term properly
+            //the element is not showing up
+            //the term is in the list so assuming the for loop is printing everything in the list,
+            //the third term should get printed (and not just end off with 2 outputs. could this have anythong to do with starting with 1/0)
+            //does this not mean that the loop is incorrect (so i can go through the prorcces of the function with certain assuptins and if a part in the process doesnt work, i can identify the problem through that.
 
         }
-
-
-
 
 
         //PART 4: The Second round of testing - Repeating terms they said they didn't get (until they give the feedback that they get all of them)
